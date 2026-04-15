@@ -36,13 +36,22 @@ const DotGridBackground = () => {
 
     const initDots = () => {
       dots = [];
-      const numDots = 2500;
       const scaleFactor = 15;
       const goldenAngle = 137.5 * (Math.PI / 180);
       
       // Place the center of the radial burst slightly off-center (left side)
       const centerX = width * 0.3;
       const centerY = height * 0.5;
+
+      // Ensure dots cover the entire screen by finding the furthest corner
+      const maxDistanceX = Math.max(centerX, width - centerX);
+      const maxDistanceY = Math.max(centerY, height - centerY);
+      const maxRadius = Math.sqrt(maxDistanceX * maxDistanceX + maxDistanceY * maxDistanceY);
+      
+      // Calculate needed dots to reach maxRadius smoothly
+      const calculatedDots = Math.floor(Math.pow((maxRadius * 1.1) / scaleFactor, 2));
+      // Cap at 10000 to maintain 60fps performance on huge screens
+      const numDots = Math.min(calculatedDots, 10000);
 
       for (let i = 1; i <= numDots; i++) {
         const radius = scaleFactor * Math.sqrt(i);
@@ -58,7 +67,7 @@ const DotGridBackground = () => {
           y: y,
           vx: 0,
           vy: 0,
-          nRadius: radius / (scaleFactor * Math.sqrt(numDots)), // 0 to 1
+          nRadius: radius / Math.max(1, maxRadius), 
           angle: angle
         });
       }
