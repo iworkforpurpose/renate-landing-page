@@ -3,8 +3,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import VideoIntro from './components/VideoIntro'
-import FeatureCurved from './components/FeatureCurved'
-import FeatureSplit from './components/FeatureSplit'
+import FeaturesTabbed from './components/FeaturesTabbed'
 import Carousel from './components/Carousel'
 import Footer from './components/Footer'
 import gsap from 'gsap'
@@ -27,26 +26,8 @@ function App() {
       <main>
         <Hero />
         <VideoIntro />
-        <FeatureCurved />
         
-        <FeatureSplit 
-          title="AI IDE Core" 
-          description="A powerful, intelligent environment that anticipates your needs and writes code alongside you."
-          imageType="code"
-          reversed={false}
-        />
-        <FeatureSplit 
-          title="Higher-level Abstractions" 
-          description="Build faster by working with advanced blocks. Let the AI handle the boilerplate."
-          imageType="blocks"
-          reversed={true}
-        />
-        <FeatureSplit 
-          title="Cross-surface Agents" 
-          description="Deploy intelligent agents that span across different parts of your application architecture."
-          imageType="nodes"
-          reversed={false}
-        />
+        <FeaturesTabbed />
         
         <Carousel type="developers" />
         <Carousel type="blogs" />
