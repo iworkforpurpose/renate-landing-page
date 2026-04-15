@@ -5,8 +5,8 @@
   --bg-secondary: #f8f9fa;
   --text-primary: #202124;
   --text-secondary: #5f6368;
-  --color-dark: #111111;
-  
+  --color-dark: #0b0a10;
+
   --renate-primary: #3F1487;
   --renate-secondary: #9156EC;
   --renate-accent: #D4B9FF;
@@ -16,7 +16,9 @@
   --border-radius-lg: 24px;
   --border-radius-xl: 32px;
 
-  --nav-height: 110px;
+  --nav-height: 84px;
+  --section-py: 120px;
+  --section-py-dark: 140px;
 }
 
 * {
@@ -57,9 +59,15 @@ button {
 
 .container {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 5%;
+  padding: 0 32px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
 }
 
 /* Utilities */
@@ -68,6 +76,69 @@ button {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.surface-glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(63, 20, 135, 0.08);
+  box-shadow: 0 20px 60px rgba(63, 20, 135, 0.06);
+}
+
+.surface-glass-dark {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--renate-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.section-eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--renate-primary);
+  box-shadow: 0 0 0 4px rgba(63, 20, 135, 0.15);
+}
+
+.dark-section .section-eyebrow {
+  color: var(--renate-accent);
+}
+.dark-section .section-eyebrow::before {
+  background: var(--renate-accent);
+  box-shadow: 0 0 0 4px rgba(212, 185, 255, 0.15);
+}
+
+.section-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.section-lede {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 640px;
+}
+
+.dark-section .section-lede {
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .btn-primary {

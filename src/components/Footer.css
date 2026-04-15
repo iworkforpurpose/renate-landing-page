@@ -1,83 +1,60 @@
 .footer {
+  background: #fafafc;
+  border-top: 1px solid rgba(17, 17, 17, 0.06);
   padding: 80px 0 40px;
-  background-color: var(--bg-primary);
-  border-top: 1px solid rgba(0,0,0,0.05);
 }
 
-.pricing-cta-cards {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 100px;
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
 }
 
-.cta-card {
-  flex: 1;
-  padding: 48px;
-  border-radius: var(--border-radius-xl);
+.footer-brand {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 40px;
-  min-height: 300px;
+  gap: 16px;
+  max-width: 320px;
 }
 
-.developer-card {
-  background: var(--bg-secondary);
-  border: 1px solid rgba(0,0,0,0.05);
+.footer-logo {
+  height: 144px;
+  width: auto;
+  object-fit: contain;
+  align-self: flex-start;
+  margin: -44px -24px -32px;
 }
 
-.org-card {
-  background: var(--renate-primary);
-  color: white;
+.footer-tagline {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
-.cta-header h3 {
-  font-size: 2rem;
-  margin-bottom: 16px;
-}
-
-.developer-card .cta-header h3 {
+.footer-col-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: var(--text-primary);
+  margin-bottom: 18px;
 }
 
-.org-card .cta-header h3 {
-  color: white;
-}
-
-.developer-card .cta-header p {
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-}
-
-.org-card .cta-header p {
-  color: rgba(255,255,255,0.7);
-  font-size: 1.1rem;
-}
-
-.cta-action {
+.footer-col ul {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
+  gap: 10px;
 }
 
-.subtext {
-  font-size: 0.85rem;
+.footer-col a {
+  font-size: 0.95rem;
   color: var(--text-secondary);
+  transition: color 0.2s ease;
 }
 
-.org-card .subtext {
-  color: rgba(255,255,255,0.7);
-}
-
-.org-card .btn-secondary {
-  background-color: var(--renate-secondary);
-  border-color: transparent;
-  color: white;
-}
-
-.org-card .btn-secondary:hover {
-  background-color: var(--renate-accent);
+.footer-col a:hover {
   color: var(--renate-primary);
 }
 
@@ -85,46 +62,39 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 32px;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 24px;
+  border-top: 1px solid rgba(17, 17, 17, 0.06);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.footer-branding {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.footer-confidential {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--renate-primary);
+  padding: 4px 12px;
+  background: rgba(63, 20, 135, 0.06);
+  border-radius: 999px;
 }
 
-.logo-icon.small {
-  width: 16px;
-  height: 16px;
-}
-
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
-
-.footer-links a {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  transition: color 0.2s ease;
-}
-
-.footer-links a:hover {
-  color: var(--text-primary);
-}
-
-@media (max-width: 768px) {
-  .pricing-cta-cards {
-    flex-direction: column;
+@media (max-width: 840px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
   }
-  
-  .footer-bottom {
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
+  .footer-brand {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 }

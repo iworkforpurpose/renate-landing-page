@@ -1,44 +1,48 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import './FeaturesTabbed.css';
 import gsap from 'gsap';
-import { Search, ListFilter, Video, BriefcaseBusiness, ArrowRight } from 'lucide-react';
+import { Globe, ScanLine, PhoneCall, ShieldCheck, ArrowRight } from 'lucide-react';
+import ShortlistCard from './mockups/ShortlistCard';
+import JobForm from './mockups/JobForm';
+import TranscriptSnippet from './mockups/TranscriptSnippet';
+import VerificationBadges from './mockups/VerificationBadges';
 
 const TABS = [
   {
-    id: 'sourcing',
-    label: 'Sourcing',
-    icon: Search,
-    title: 'Automated Candidate Sourcing: Find the Perfect Match',
-    description: 'Renate actively scours multiple platforms to identify and engage top-tier candidates for your roles, completely hands-free. We integrate with global talent pools to bring you quality talent faster than ever before.',
-    btnText: 'Start Sourcing',
-    imgUrl: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    id: 'source',
+    label: 'Source',
+    icon: Globe,
+    title: 'Active sourcing, not a passive inbox.',
+    description:
+      'Renate goes out and finds candidates across public profiles — your pipeline isn\'t limited to whoever happened to see the post.',
+    Visual: JobForm
   },
   {
-    id: 'shortlisting',
-    label: 'Shortlisting',
-    icon: ListFilter,
-    title: 'Intelligent Resume Screening: Zero Bias, 100% Precision',
-    description: 'Instantly analyze and rank thousands of resumes against your specific criteria. Renate cuts through the noise to surface the very best matches, saving your HR team hundreds of manual screening hours.',
-    btnText: 'Try Smart Screen',
-    imgUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    id: 'screen',
+    label: 'Screen',
+    icon: ScanLine,
+    title: 'Reads every resume. Scores on evidence.',
+    description:
+      'No keyword filters. Every score is grounded in specific projects, roles, and outcomes — so strong candidates don\'t get thrown out because they used the wrong word.',
+    Visual: ShortlistCard
   },
   {
-    id: 'interviewing',
-    label: 'Interviewing',
-    icon: Video,
-    title: 'AI-Powered Autonomous Interviews: Scaling Culture Fit',
-    description: 'Deploy our conversational AI agents to conduct initial screening profiles via voice or chat. We evaluate candidates on technical skills, soft skills, and culture fit in a bias-free environment.',
-    btnText: 'Experience an Interview',
-    imgUrl: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    id: 'interview',
+    label: 'Interview',
+    icon: PhoneCall,
+    title: 'Voice interviews, conducted autonomously.',
+    description:
+      'Renate picks up the phone, asks role-specific questions, and listens for real signal. Every call is transcribed, scored, and filed.',
+    Visual: TranscriptSnippet
   },
   {
-    id: 'hiring',
-    label: 'Hiring',
-    icon: BriefcaseBusiness,
-    title: 'Seamless Onboarding & Offers: Close the Deal Faster',
-    description: 'Automate the final stages of your hiring pipeline. From generating dynamic offer letters to seamless data synchronization with your existing ATS, Renate ensures a premium experience for every new hire.',
-    btnText: 'Learn More',
-    imgUrl: 'https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    id: 'verify',
+    label: 'Verify',
+    icon: ShieldCheck,
+    title: 'Claims checked before the shortlist.',
+    description:
+      'Resume exaggeration gets flagged now, not at the offer stage after you\'ve spent a full loop on someone who didn\'t actually ship what they claimed.',
+    Visual: VerificationBadges
   }
 ];
 
@@ -48,15 +52,13 @@ export default function FeaturesTabbed() {
 
   const handleTabClick = (id) => {
     if (activeTab === id) return;
-    
-    // Animate out
+
     gsap.to(contentRef.current, {
       opacity: 0,
       y: 10,
       duration: 0.2,
       onComplete: () => {
         setActiveTab(id);
-        // Animate in
         gsap.to(contentRef.current, {
           opacity: 1,
           y: 0,
@@ -67,15 +69,22 @@ export default function FeaturesTabbed() {
     });
   };
 
-  const activeContent = TABS.find(t => t.id === activeTab);
+  const active = TABS.find(t => t.id === activeTab);
+  const ActiveVisual = active.Visual;
 
   return (
-    <section className="features-tabbed" id="platform">
+    <section className="features-tabbed" id="product">
       <div className="container">
         <div className="ft-header">
-          <div className="ft-badge"><span>●</span> OUR PLATFORM</div>
-          <h2>Everything Your <span className="text-gradient">Hiring Pipeline</span> Needs,<br/>In <span className="text-gradient">One</span> AI Platform</h2>
-          <p>From initial outreach to final offer—automate manual tasks, reach wider talent pools, and build stellar teams faster.</p>
+          <span className="section-eyebrow">The platform</span>
+          <h2 className="section-title">
+            Everything the hiring pipeline needs,<br />
+            in <span className="text-gradient">one AI agent.</span>
+          </h2>
+          <p className="section-lede">
+            From the first resume to the post-interview summary — owned end to end,
+            with an audit trail at every step.
+          </p>
         </div>
 
         <div className="ft-tabs-wrapper">
@@ -85,11 +94,11 @@ export default function FeaturesTabbed() {
               const isActive = activeTab === tab.id;
               return (
                 <li key={tab.id} className="ft-tab-item">
-                  <button 
+                  <button
                     className={`ft-tab-btn ${isActive ? 'active' : ''}`}
                     onClick={() => handleTabClick(tab.id)}
                   >
-                    <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
+                    <Icon size={18} strokeWidth={isActive ? 2.25 : 1.75} />
                     <span>{tab.label}</span>
                   </button>
                 </li>
@@ -101,22 +110,22 @@ export default function FeaturesTabbed() {
         <div className="ft-content-box">
           <div className="ft-content-inner" ref={contentRef}>
             <div className="ft-text-col">
-              <h3>{activeContent.title}</h3>
-              <p>{activeContent.description}</p>
-              
+              <h3>{active.title}</h3>
+              <p>{active.description}</p>
+
               <div className="ft-actions">
-                <button className="btn-primary">
-                  {activeContent.btnText}
-                  <ArrowRight size={18} />
+                <button className="btn-primary" data-cursor="magnetic">
+                  Book a demo
+                  <ArrowRight size={16} />
                 </button>
-                <button className="btn-secondary">
-                  Learn More
-                </button>
+                <a className="ft-link" href="#workflow">
+                  See the full workflow
+                </a>
               </div>
             </div>
-            <div className="ft-img-col">
-              <div className="ft-mockup-wrapper">
-                <img src={activeContent.imgUrl} alt={activeContent.title} />
+            <div className="ft-visual-col">
+              <div className="ft-visual-wrapper">
+                <ActiveVisual />
               </div>
             </div>
           </div>

@@ -2,9 +2,12 @@ import { useEffect } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import VideoIntro from './components/VideoIntro'
+import ProblemStrip from './components/ProblemStrip'
+import Workflow from './components/Workflow'
 import FeaturesTabbed from './components/FeaturesTabbed'
-import Carousel from './components/Carousel'
+import BenefitsGrid from './components/BenefitsGrid'
+import AlwaysReachable from './components/AlwaysReachable'
+import ClosingCTA from './components/ClosingCTA'
 import Footer from './components/Footer'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -13,8 +16,6 @@ gsap.registerPlugin(ScrollTrigger)
 
 function App() {
   useEffect(() => {
-    // Global scroll effects setup
-    
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill())
     }
@@ -25,12 +26,12 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <VideoIntro />
-        
+        <ProblemStrip />
+        <Workflow />
         <FeaturesTabbed />
-        
-        <Carousel type="developers" />
-        <Carousel type="blogs" />
+        <BenefitsGrid />
+        <AlwaysReachable />
+        <ClosingCTA />
       </main>
       <Footer />
     </div>
