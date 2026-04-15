@@ -1,0 +1,68 @@
+.feature-curved {
+  padding: 160px 0;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+.curved-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.typewriter-text {
+  font-size: clamp(1.2rem, 3.5vw, 3rem);
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 16px;
+  min-height: 120px;
+  margin-bottom: 250px;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  color: var(--renate-primary);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.icons-wave {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.icon-circle {
+  width: 72px;
+  height: 72px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  position: absolute;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.02);
+}
+
+.icon-circle:hover {
+  transform: scale(1.1) translateY(-10px) !important;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  z-index: 10;
+}
