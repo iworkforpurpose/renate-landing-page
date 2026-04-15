@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import './Hero.css';
 import gsap from 'gsap';
+import Cursor from './Cursor';
+import DotGridBackground from './DotGridBackground';
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -40,10 +42,9 @@ export default function Hero() {
 
   return (
     <section className="hero" ref={heroRef} id="home">
+      <Cursor scopeRef={heroRef} />
       <div className="hero-background">
-        <div className="orb blue-orb"></div>
-        <div className="orb purple-orb"></div>
-        <div className="orb yellow-orb"></div>
+        <DotGridBackground />
       </div>
       
       <div className="container hero-container" ref={textRef}>
@@ -62,7 +63,7 @@ export default function Hero() {
           </p>
           
           <div className="hero-ctas">
-            <button className="btn-primary">
+            <button className="btn-primary" data-cursor="magnetic">
               Talk to us!
             </button>
           </div>

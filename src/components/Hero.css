@@ -8,6 +8,17 @@
   overflow: hidden;
 }
 
+/* Hide the native cursor inside the hero so the custom Cursor component can take over.
+   Scoped to devices that have a real hover-capable pointer and no reduced-motion preference. */
+@media (hover: hover) and (pointer: fine) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero,
+    .hero * {
+      cursor: none;
+    }
+  }
+}
+
 .hero-background {
   position: absolute;
   top: 0;
@@ -19,53 +30,6 @@
   overflow: hidden;
 }
 
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.5;
-  animation: float 20s infinite ease-in-out alternate;
-}
-
-.blue-orb {
-  width: 400px;
-  height: 400px;
-  background-color: var(--renate-secondary);
-  top: -100px;
-  right: -100px;
-  animation-delay: 0s;
-}
-
-.purple-orb {
-  width: 500px;
-  height: 500px;
-  background-color: var(--renate-primary);
-  bottom: -200px;
-  left: -100px;
-  animation-delay: -5s;
-}
-
-.yellow-orb {
-  width: 300px;
-  height: 300px;
-  background-color: var(--renate-accent);
-  top: 40%;
-  left: 30%;
-  opacity: 0.3;
-  animation-delay: -10s;
-}
-
-@keyframes float {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(50px, 30px) scale(1.1);
-  }
-  100% {
-    transform: translate(-30px, 60px) scale(0.9);
-  }
-}
 
 .hero-container {
   display: flex;
