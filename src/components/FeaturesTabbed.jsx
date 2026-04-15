@@ -74,7 +74,7 @@ export default function FeaturesTabbed() {
       <div className="container">
         <div className="ft-header">
           <div className="ft-badge"><span>●</span> OUR PLATFORM</div>
-          <h2>Everything Your Hiring Pipeline Needs,<br/>In One AI Platform</h2>
+          <h2>Everything Your <span className="text-gradient">Hiring Pipeline</span> Needs,<br/>In <span className="text-gradient">One</span> AI Platform</h2>
           <p>From initial outreach to final offer—automate manual tasks, reach wider talent pools, and build stellar teams faster.</p>
         </div>
 

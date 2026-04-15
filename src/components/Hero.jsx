@@ -55,7 +55,9 @@ export default function Hero() {
           </div>
           
           <h1 className="hero-headline">
-            <span>AI that hires for you</span>
+            <span className="text-line">AI that</span>
+            <span className="text-gradient">hires</span>
+            <span className="text-line">for you</span>
           </h1>
           
           <p className="hero-subheadline">

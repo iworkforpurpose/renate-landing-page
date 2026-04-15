@@ -75,12 +75,16 @@
   gap: 16px;
 }
 
-.hero-headline span {
+.hero-headline .text-line {
   display: inline-block;
   background: linear-gradient(135deg, var(--text-primary) 0%, #4a4a4a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.hero-headline .text-gradient {
+  display: inline-block;
 }
 
 .hero-subheadline {
