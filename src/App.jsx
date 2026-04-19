@@ -1,37 +1,33 @@
-import { useEffect } from 'react'
-import './App.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import ProblemStrip from './components/ProblemStrip'
+import PipelineCompressionStrip from './components/PipelineCompressionStrip'
+import DesignPartners from './components/DesignPartners'
+import ScoringPipeline from './components/ScoringPipeline'
+import ShortlistDeepDive from './components/ShortlistDeepDive'
+import SeeItRun from './components/SeeItRun'
+import VoiceInterview from './components/VoiceInterview'
 import Workflow from './components/Workflow'
-import FeaturesTabbed from './components/FeaturesTabbed'
-import BenefitsGrid from './components/BenefitsGrid'
-import AlwaysReachable from './components/AlwaysReachable'
-import ClosingCTA from './components/ClosingCTA'
+import TalkToRecruiter from './components/TalkToRecruiter'
+import Team from './components/Team'
+import MetricsCTA from './components/MetricsCTA'
 import Footer from './components/Footer'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 function App() {
-  useEffect(() => {
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill())
-    }
-  }, [])
-
   return (
-    <div className="app-container">
+    <div className="min-h-screen bg-white text-ink-800 font-display antialiased">
       <Navbar />
       <main>
         <Hero />
-        <ProblemStrip />
+        <PipelineCompressionStrip />
+        <DesignPartners />
+        <ScoringPipeline />
+        <ShortlistDeepDive />
+        <SeeItRun />
+        <VoiceInterview />
         <Workflow />
-        <FeaturesTabbed />
-        <BenefitsGrid />
-        <AlwaysReachable />
-        <ClosingCTA />
+        <TalkToRecruiter />
+        <Team />
+        <MetricsCTA />
       </main>
       <Footer />
     </div>

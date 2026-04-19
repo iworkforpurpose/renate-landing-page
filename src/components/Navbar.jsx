@@ -1,111 +1,148 @@
-import { useEffect, useState } from 'react';
-import './Navbar.css';
-import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react'
+import { Menu, X } from 'lucide-react'
+import { cn } from '../lib/cn'
+import Button from './primitives/Button'
+
+const LINKS = [
+  { href: '#workflow',  label: 'How it works' },
+  { href: '#shortlist', label: 'Shortlist' },
+  { href: '#voice',     label: 'Voice interview' },
+  { href: '#talk',      label: 'Talk to Renate' },
+]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [onDark, setOnDark] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const [onDark, setOnDark] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 24);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Track when the navbar sits over a .dark-section so we can flip its tint + text.
-  useEffect(() => {
-    const darkSections = document.querySelectorAll('.dark-section');
-    if (!darkSections.length) return;
-
-    const navH = parseInt(
-      getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
-    ) || 84;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Any dark section crossing the nav band → dark nav.
-        const anyHit = entries.some((e) => e.isIntersecting);
-        setOnDark((prev) => {
-          // If no entries hit, recompute by checking all remembered states
-          if (anyHit) return true;
-          // Otherwise, only flip to light if *every* currently-intersecting-nav section is out
-          const stillOnDark = Array.from(darkSections).some((el) => {
-            const r = el.getBoundingClientRect();
-            return r.top < navH && r.bottom > 0;
-          });
-          return stillOnDark;
-        });
-      },
-      {
-        // Trigger when a dark section's top crosses the bottom of the nav and
-        // while its bottom is still below the nav top.
-        rootMargin: `0px 0px -${Math.max(window.innerHeight - navH, 1)}px 0px`,
-        threshold: 0
-      }
-    );
-
-    darkSections.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+    const handleScroll = () => setScrolled(window.scrollY > 24)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [mobileOpen]);
+    const darkSections = document.querySelectorAll('[data-theme="dark"]')
+    if (!darkSections.length) return
 
-  const links = [
-    { href: '#product', label: 'Product' },
-    { href: '#workflow', label: 'How it works' },
-    { href: '#benefits', label: 'Why Renate' }
-  ];
+    const recompute = () => {
+      const navH = 76
+      const hit = Array.from(darkSections).some(el => {
+        const r = el.getBoundingClientRect()
+        return r.top < navH && r.bottom > navH / 2
+      })
+      setOnDark(hit)
+    }
+    recompute()
+    window.addEventListener('scroll', recompute, { passive: true })
+    window.addEventListener('resize', recompute)
+    return () => {
+      window.removeEventListener('scroll', recompute)
+      window.removeEventListener('resize', recompute)
+    }
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
 
   return (
     <>
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${onDark ? 'on-dark' : ''}`}>
-        <div className="container nav-content">
-          <a href="#home" className="nav-logo" aria-label="Renate home">
-            <img src="/logo-transparent.png" alt="Renate" />
+      <nav
+        className={cn(
+          'fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-out-expo',
+          scrolled ? 'backdrop-blur-xl' : '',
+          onDark
+            ? 'bg-ink-900/80 text-white border-b border-white/10'
+            : scrolled
+              ? 'bg-white/80 text-ink-900 border-b border-ink-100'
+              : 'bg-transparent text-ink-900 border-b border-transparent',
+        )}
+      >
+        <div className="mx-auto max-w-shell px-5 md:px-8 h-[var(--nav-h,76px)] flex items-center justify-between" style={{ height: 76 }}>
+          <a href="#home" className="flex items-center" aria-label="Renate home">
+            <img
+              src="/logo-wordmark.png"
+              alt="Renate"
+              className={cn(
+                'h-8 md:h-9 w-auto transition-[filter] duration-300',
+                onDark && '[filter:brightness(0)_invert(1)]',
+              )}
+            />
           </a>
 
-          <div className="nav-links" role="navigation">
-            {links.map(l => (
-              <a key={l.href} href={l.href}>{l.label}</a>
+          <div className="hidden md:flex items-center gap-8">
+            {LINKS.map(l => (
+              <a
+                key={l.href}
+                href={l.href}
+                className={cn(
+                  'text-[13px] font-medium transition-colors',
+                  onDark ? 'text-white/70 hover:text-white' : 'text-ink-600 hover:text-ink-900',
+                )}
+              >
+                {l.label}
+              </a>
             ))}
           </div>
 
-          <div className="nav-actions">
-            <button className="btn-primary" data-cursor="magnetic">
+          <div className="flex items-center gap-2">
+            <Button
+              as="a"
+              href="#cta"
+              variant={onDark ? 'brand' : 'primary'}
+              size="sm"
+              className="hidden sm:inline-flex"
+            >
               Book a demo
-            </button>
+            </Button>
             <button
-              className="nav-hamburger"
+              className={cn(
+                'inline-flex md:hidden h-9 w-9 items-center justify-center rounded-lg ring-1',
+                onDark ? 'ring-white/20 text-white' : 'ring-ink-200 text-ink-800',
+              )}
               aria-label="Open menu"
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen(true)}
             >
-              <Menu size={22} />
+              <Menu size={18} />
             </button>
           </div>
         </div>
       </nav>
 
-      <div className={`nav-mobile ${mobileOpen ? 'open' : ''}`} aria-hidden={!mobileOpen}>
-        <div className="nav-mobile-header">
-          <span className="nav-mobile-brand">Renate</span>
-          <button className="nav-mobile-close" aria-label="Close menu" onClick={() => setMobileOpen(false)}>
-            <X size={24} />
+      {/* mobile drawer */}
+      <div
+        className={cn(
+          'fixed inset-0 z-[60] bg-white transition-opacity md:hidden',
+          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
+        )}
+        aria-hidden={!mobileOpen}
+      >
+        <div className="flex items-center justify-between px-5 h-[76px] border-b border-ink-100">
+          <img src="/logo-wordmark.png" alt="Renate" className="h-8 w-auto" />
+          <button aria-label="Close menu" onClick={() => setMobileOpen(false)} className="h-9 w-9 inline-flex items-center justify-center rounded-lg ring-1 ring-ink-200">
+            <X size={18} />
           </button>
         </div>
-        <div className="nav-mobile-links">
-          {links.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setMobileOpen(false)}>{l.label}</a>
+        <div className="flex flex-col gap-1 p-5">
+          {LINKS.map(l => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setMobileOpen(false)}
+              className="py-3 text-[18px] font-medium text-ink-900 border-b border-ink-100"
+            >
+              {l.label}
+            </a>
           ))}
-        </div>
-        <div className="nav-mobile-cta">
-          <button className="btn-primary" onClick={() => setMobileOpen(false)}>Book a demo</button>
+          <Button as="a" href="#cta" variant="primary" size="lg" className="mt-6" onClick={() => setMobileOpen(false)}>
+            Book a demo
+          </Button>
         </div>
       </div>
     </>
-  );
+  )
 }
