@@ -128,7 +128,7 @@ export default function MetricsCTA() {
 
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Button as="a" href="#cta" variant="primary" size="lg">
-              Join the Q3 cohort <ArrowRight size={16} />
+              Become a design partner <ArrowRight size={16} />
             </Button>
             <Button as="a" href="mailto:hello@renate.in" variant="ghost" size="lg">
               hello@renate.in
@@ -138,7 +138,7 @@ export default function MetricsCTA() {
           <div className="w-full flex flex-col items-center gap-2 pt-2">
             <WaitlistForm />
             <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-ink-500">
-              Q3 cohort · 8 of 10 slots filled · next review March 12
+              Design partner program · 8 of 10 seats filled · next review March 12
             </p>
           </div>
         </motion.div>

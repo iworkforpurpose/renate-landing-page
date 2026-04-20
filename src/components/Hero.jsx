@@ -37,7 +37,7 @@ export default function Hero() {
           >
             <div className="inline-flex items-center gap-2 self-start rounded-full bg-white px-3 py-1.5 ring-1 ring-amber-500/30 shadow-soft-1">
               <span className="relative flex h-2 w-2"><span className="absolute inset-0 rounded-full bg-amber-500 animate-ping opacity-50" /><span className="relative h-2 w-2 rounded-full bg-amber-500" /></span>
-              <span className="text-[11px] font-medium text-amber-700">Q3 private beta · 8 of 10 cohort slots filled</span>
+              <span className="text-[11px] font-medium text-amber-700">Design partner program · 8 of 10 seats filled</span>
             </div>
 
             {/* POV kicker */}
@@ -56,7 +56,7 @@ export default function Hero() {
 
             <div className="flex flex-wrap items-center gap-3">
               <Button as="a" href="#cta" variant="primary" size="lg">
-                Join the Q3 cohort <ArrowRight size={16} />
+                Become a design partner <ArrowRight size={16} />
               </Button>
               <Button as="a" href="#see-it-run" variant="link" size="lg">
                 Watch a 90-second demo →
