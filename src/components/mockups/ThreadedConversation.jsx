@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Sparkles, Phone, MessageCircle } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 import { useState } from 'react'
 import MockupFrame from '../primitives/MockupFrame'
 import { cn } from '../../lib/cn'
@@ -63,13 +63,11 @@ const THREAD = [
 ]
 
 const CHANNELS = [
-  { key: 'chat',     label: 'Chat',     icon: Sparkles },
   { key: 'whatsapp', label: 'WhatsApp', icon: MessageCircle },
-  { key: 'call',     label: 'Call',     icon: Phone },
 ]
 
 export default function ThreadedConversation({ className }) {
-  const [channel, setChannel] = useState('chat')
+  const [channel, setChannel] = useState('whatsapp')
 
   return (
     <div className={cn('flex flex-col gap-4', className)}>

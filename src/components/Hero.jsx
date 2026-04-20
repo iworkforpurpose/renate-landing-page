@@ -56,7 +56,7 @@ export default function Hero() {
 
             <div className="flex flex-wrap items-center gap-3">
               <Button as="a" href="#cta" variant="primary" size="lg">
-                Become a design partner <ArrowRight size={16} />
+                Contact Us <ArrowRight size={16} />
               </Button>
               <Button as="a" href="#see-it-run" variant="link" size="lg">
                 Watch a 90-second demo →
