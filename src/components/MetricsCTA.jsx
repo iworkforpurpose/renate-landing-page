@@ -123,7 +123,7 @@ export default function MetricsCTA() {
             <span className="text-gradient">Ready to meet your next hire?</span>
           </h2>
           <p className="text-lede text-ink-600 max-w-prose">
-            Submit a job. Walk into every interview already prepared.
+            Post a job. Walk into every interview already prepared.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3">

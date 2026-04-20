@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-5 flex flex-col gap-4">
             <img src="/logo-wordmark.png" alt="Renate" className="h-10 w-auto self-start" />
             <p className="text-[14px] text-ink-500 max-w-sm leading-relaxed">
-              Your autonomous AI recruiter. Submit a job. Walk into every interview already prepared.
+              Your autonomous AI recruiter. Post a job. Walk into every interview already prepared.
             </p>
             <div className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-[0.18em] text-ink-400">
               <span className="h-1.5 w-1.5 rounded-full bg-mint-500" />

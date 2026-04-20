@@ -46,7 +46,7 @@ export default function Hero() {
             </p>
 
             <h1 className="text-hero font-semibold text-ink-900">
-              Submit a job.{' '}
+              Post a job.{' '}
               <span className="text-gradient">Get a shortlist.</span>
             </h1>
 
