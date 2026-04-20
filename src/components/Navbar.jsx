@@ -4,7 +4,6 @@ import { cn } from '../lib/cn'
 import Button from './primitives/Button'
 
 const LINKS = [
-  { href: '#workflow',  label: 'How it works' },
   { href: '#shortlist', label: 'Shortlist' },
   { href: '#voice',     label: 'Voice interview' },
   { href: '#talk',      label: 'Talk to Renate' },

@@ -22,7 +22,6 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-ink-400 mb-3">Product</div>
             <ul className="flex flex-col gap-2 text-[14px]">
-              <li><a href="#workflow"  className="text-ink-700 hover:text-brand-800">How it works</a></li>
               <li><a href="#shortlist" className="text-ink-700 hover:text-brand-800">Shortlist</a></li>
               <li><a href="#voice"     className="text-ink-700 hover:text-brand-800">Voice interview</a></li>
               <li><a href="#talk"      className="text-ink-700 hover:text-brand-800">Always reachable</a></li>
