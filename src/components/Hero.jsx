@@ -35,11 +35,6 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 flex flex-col gap-6"
           >
-            <div className="inline-flex items-center gap-2 self-start rounded-full bg-white px-3 py-1.5 ring-1 ring-amber-500/30 shadow-soft-1">
-              <span className="relative flex h-2 w-2"><span className="absolute inset-0 rounded-full bg-amber-500 animate-ping opacity-50" /><span className="relative h-2 w-2 rounded-full bg-amber-500" /></span>
-              <span className="text-[11px] font-medium text-amber-700">Design partner program · 8 of 10 seats filled</span>
-            </div>
-
             {/* POV kicker */}
             <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-brand-700">
               The ATS was built for 1998. This is the recruiter for 2026.
