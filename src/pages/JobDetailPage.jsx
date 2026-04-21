@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import ScoreBar from '../components/primitives/ScoreBar'
 import { getJobBySlug, VERDICT_TONE } from '../data/dashboardData'
+import { usePostedJobs } from '../lib/postedJobs'
 import { cn } from '../lib/cn'
 
 const ICONS = {
@@ -21,7 +22,8 @@ const VERDICT_CLASS = {
 
 export default function JobDetailPage() {
   const { jobId } = useParams()
-  const job = getJobBySlug(jobId)
+  const postedJobs = usePostedJobs()
+  const job = getJobBySlug(jobId) || postedJobs.find((j) => j.slug === jobId)
 
   if (!job) return <Navigate to="/dashboard/jobs" replace />
 

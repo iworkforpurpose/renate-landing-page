@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, ArrowDownRight, ChevronRight } from 'lucide-react'
+import { ArrowUpRight, ArrowDownRight, ChevronRight, Plus, Briefcase } from 'lucide-react'
 import { JOBS, VERDICT_TONE } from '../data/dashboardData'
 import { getOrg } from '../lib/auth'
+import { usePostedJobs } from '../lib/postedJobs'
 import { cn } from '../lib/cn'
+import PostJobModal from '../components/PostJobModal'
 
 const VERDICT_CLASS = {
   mint:  'bg-mint-500/15 text-mint-700 ring-mint-500/30',
@@ -20,12 +23,14 @@ const ACTIVITY = [
   { when: '2 days ago',  actor: 'Renate',         action: 'rejected',                    target: 'Wade Harrison · RevOps Lead', tone: 'rose' },
 ]
 
-const METRICS = [
-  { label: 'Active roles',          value: JOBS.length,                                                              delta: '+1',   dir: 'up',   sub: 'vs. last week' },
-  { label: 'Candidates in pipeline', value: JOBS.reduce((n, j) => n + j.stats.qualified, 0),                          delta: '+184', dir: 'up',   sub: 'vs. last week' },
-  { label: 'Interviewed (7d)',      value: JOBS.reduce((n, j) => n + j.stats.interviewed, 0),                        delta: '+22',  dir: 'up',   sub: 'vs. prior 7d' },
-  { label: 'Time to shortlist',     value: '4.2d',                                                                    delta: '-1.1d',dir: 'down', sub: 'vs. prior 7d' },
-]
+function buildMetrics(allJobs) {
+  return [
+    { label: 'Active roles',           value: allJobs.length,                                           delta: '+1',    dir: 'up',   sub: 'vs. last week' },
+    { label: 'Candidates in pipeline', value: allJobs.reduce((n, j) => n + j.stats.qualified, 0),       delta: '+184',  dir: 'up',   sub: 'vs. last week' },
+    { label: 'Interviewed (7d)',       value: allJobs.reduce((n, j) => n + j.stats.interviewed, 0),    delta: '+22',   dir: 'up',   sub: 'vs. prior 7d' },
+    { label: 'Time to shortlist',      value: '4.2d',                                                   delta: '-1.1d', dir: 'down', sub: 'vs. prior 7d' },
+  ]
+}
 
 function fundinglessFormat(n) {
   if (typeof n !== 'number') return n
@@ -36,8 +41,13 @@ function fundinglessFormat(n) {
 export default function DashboardOverviewPage() {
   const org = getOrg()
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
+  const postedJobs = usePostedJobs()
+  const [modalOpen, setModalOpen] = useState(false)
 
-  const totals = JOBS.reduce(
+  const allJobs = [...postedJobs, ...JOBS]
+  const metrics = buildMetrics(allJobs)
+
+  const totals = allJobs.reduce(
     (acc, j) => ({
       sourced:     acc.sourced     + j.stats.sourced,
       qualified:   acc.qualified   + j.stats.qualified,
@@ -46,9 +56,9 @@ export default function DashboardOverviewPage() {
     }),
     { sourced: 0, qualified: 0, interviewed: 0, shortlisted: 0 },
   )
-  const maxFunnel = totals.sourced
+  const maxFunnel = totals.sourced || 1
 
-  const topCandidates = JOBS.flatMap((j) => j.candidates.map((c) => ({ ...c, job: j })))
+  const topCandidates = allJobs.flatMap((j) => j.candidates.map((c) => ({ ...c, job: j })))
     .sort((a, b) => b.atsScore - a.atsScore)
     .slice(0, 6)
 
@@ -67,15 +77,56 @@ export default function DashboardOverviewPage() {
             </h1>
             <p className="text-[13px] text-ink-500">{today}</p>
           </div>
-          <div className="flex items-center gap-2 text-[12px] text-ink-500">
-            <span className="h-1.5 w-1.5 rounded-full bg-mint-500" />
-            <span>Renate active · 3 interviews in progress</span>
+          <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-2 text-[12px] text-ink-500">
+              <span className="h-1.5 w-1.5 rounded-full bg-mint-500" />
+              <span>Renate active · 3 interviews in progress</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setModalOpen(true)}
+              className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-ink-900 px-3.5 text-[13px] font-medium text-white hover:bg-brand-800 transition shadow-soft-1"
+            >
+              <Plus size={14} /> Post a job
+            </button>
           </div>
         </div>
 
+        {postedJobs.length > 0 && (
+          <div className="rounded-xl bg-white ring-1 ring-ink-200 mb-6 overflow-hidden">
+            <div className="flex items-center justify-between px-5 py-3.5 border-b border-ink-100">
+              <h2 className="text-[13.5px] font-semibold text-ink-900">Your posted jobs</h2>
+              <span className="text-[11.5px] text-ink-400">{postedJobs.length} new</span>
+            </div>
+            <ul className="divide-y divide-ink-100">
+              {postedJobs.map((j) => (
+                <li key={j.id} className="px-5 py-3.5 flex items-start gap-3">
+                  <div className="mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-lg bg-brand-50 text-brand-700">
+                    <Briefcase size={14} />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                      <span className="text-[13.5px] font-semibold text-ink-900 truncate">{j.title}</span>
+                      <span className="text-[11.5px] text-ink-500">{j.location}</span>
+                      <span className="text-ink-300 text-[11px]">·</span>
+                      <span className="text-[11.5px] text-ink-500">{j.experience}</span>
+                      <span className="text-ink-300 text-[11px]">·</span>
+                      <span className="text-[11.5px] text-ink-500">{j.payRange}</span>
+                    </div>
+                    {j.summary && (
+                      <p className="text-[12.5px] text-ink-600 mt-1 line-clamp-2">{j.summary}</p>
+                    )}
+                  </div>
+                  <span className="text-[11px] text-ink-400 flex-none tabular">{j.postedAt}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         {/* Metrics */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
-          {METRICS.map((m) => (
+          {metrics.map((m) => (
             <div key={m.label} className="rounded-xl bg-white ring-1 ring-ink-200 p-4 flex flex-col gap-2">
               <span className="text-[11.5px] text-ink-500">{m.label}</span>
               <div className="flex items-baseline justify-between gap-2">
@@ -98,7 +149,7 @@ export default function DashboardOverviewPage() {
           <div className="lg:col-span-1 rounded-xl bg-white ring-1 ring-ink-200 p-5">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-[13.5px] font-semibold text-ink-900">Pipeline</h2>
-              <span className="text-[11px] text-ink-400">across {JOBS.length} roles</span>
+              <span className="text-[11px] text-ink-400">across {allJobs.length} roles</span>
             </div>
             <div className="flex flex-col gap-3">
               {[
@@ -194,6 +245,8 @@ export default function DashboardOverviewPage() {
           </ul>
         </div>
       </div>
+
+      <PostJobModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </motion.div>
   )
 }

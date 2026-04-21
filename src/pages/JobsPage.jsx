@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Search, Users, ChevronRight } from 'lucide-react'
+import { Search, Users, ChevronRight, Plus } from 'lucide-react'
 import { JOBS, VERDICT_TONE } from '../data/dashboardData'
+import { usePostedJobs } from '../lib/postedJobs'
+import PostJobModal from '../components/PostJobModal'
 import { cn } from '../lib/cn'
 
 const formatNum = (n) => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k` : String(n))
@@ -89,12 +91,15 @@ function JobRow({ job }) {
 export default function JobsPage() {
   const [query, setQuery] = useState('')
   const [dept, setDept] = useState('All')
+  const [modalOpen, setModalOpen] = useState(false)
+  const postedJobs = usePostedJobs()
 
-  const departments = useMemo(() => ['All', ...new Set(JOBS.map((j) => j.department))], [])
+  const allJobs = useMemo(() => [...postedJobs, ...JOBS], [postedJobs])
+  const departments = useMemo(() => ['All', ...new Set(allJobs.map((j) => j.department))], [allJobs])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return JOBS.filter((j) => {
+    return allJobs.filter((j) => {
       if (dept !== 'All' && j.department !== dept) return false
       if (!q) return true
       return (
@@ -103,7 +108,7 @@ export default function JobsPage() {
         j.location.toLowerCase().includes(q)
       )
     })
-  }, [query, dept])
+  }, [query, dept, allJobs])
 
   return (
     <motion.div
@@ -116,7 +121,7 @@ export default function JobsPage() {
         <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
           <div className="flex flex-col gap-1">
             <h1 className="text-[22px] md:text-[26px] font-semibold text-ink-900 leading-tight">Jobs posted</h1>
-            <p className="text-[13px] text-ink-500">{JOBS.length} open roles · {JOBS.reduce((n, j) => n + j.candidates.length, 0)} candidates</p>
+            <p className="text-[13px] text-ink-500">{allJobs.length} open roles · {allJobs.reduce((n, j) => n + j.candidates.length, 0)} candidates</p>
           </div>
 
           <div className="flex items-center gap-2 w-full md:w-auto">
@@ -130,6 +135,13 @@ export default function JobsPage() {
                 className="w-full h-9 rounded-lg bg-white ring-1 ring-ink-200 focus:ring-ink-400 pl-8 pr-3 text-[13px] text-ink-900 placeholder:text-ink-400 focus:outline-none transition"
               />
             </div>
+            <button
+              type="button"
+              onClick={() => setModalOpen(true)}
+              className="inline-flex h-9 flex-none items-center gap-1.5 rounded-lg bg-ink-900 px-3.5 text-[13px] font-medium text-white hover:bg-brand-800 transition shadow-soft-1"
+            >
+              <Plus size={14} /> Post a job
+            </button>
           </div>
         </div>
 
@@ -150,7 +162,7 @@ export default function JobsPage() {
             </button>
           ))}
           <span className="ml-auto text-[11.5px] text-ink-400">
-            Showing {filtered.length} of {JOBS.length}
+            Showing {filtered.length} of {allJobs.length}
           </span>
         </div>
 
@@ -179,6 +191,8 @@ export default function JobsPage() {
           )}
         </div>
       </div>
+
+      <PostJobModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </motion.div>
   )
 }
