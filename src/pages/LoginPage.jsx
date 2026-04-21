@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../components/primitives/Button'
-import { setSignedUp } from '../lib/auth'
+import { setSignedUp, getOrg, setOrg } from '../lib/auth'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -34,6 +34,17 @@ export default function LoginPage() {
     setErrors(next)
     if (Object.keys(next).length === 0) {
       // TODO: replace with real login endpoint
+      if (!getOrg()) {
+        const email = form.email.trim()
+        const domain = email.split('@')[1] || ''
+        const inferredName = domain.split('.')[0]
+        setOrg({
+          name: inferredName ? inferredName.charAt(0).toUpperCase() + inferredName.slice(1) : 'Your organisation',
+          username: email.split('@')[0],
+          email,
+          createdAt: new Date().toISOString(),
+        })
+      }
       setSignedUp()
       navigate('/dashboard')
     }

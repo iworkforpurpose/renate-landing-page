@@ -8,6 +8,7 @@ import JobsPage from './pages/JobsPage'
 import JobDetailPage from './pages/JobDetailPage'
 import CandidatesPage from './pages/CandidatesPage'
 import CandidateDetailPage from './pages/CandidateDetailPage'
+import SettingsPage from './pages/SettingsPage'
 import { isSignedUp } from './lib/auth'
 
 function RequireSignup({ children }) {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/dashboard/jobs/:jobId" element={<RequireSignup><JobDetailPage /></RequireSignup>} />
         <Route path="/dashboard/jobs/:jobId/:candidateId" element={<RequireSignup><CandidateDetailPage /></RequireSignup>} />
         <Route path="/dashboard/candidates" element={<RequireSignup><CandidatesPage /></RequireSignup>} />
+        <Route path="/dashboard/settings" element={<RequireSignup><SettingsPage /></RequireSignup>} />
       </Route>
     </Routes>
   )

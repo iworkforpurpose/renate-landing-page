@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Briefcase, Users, Menu, X, LogOut } from 'lucide-react'
+import { LayoutDashboard, Briefcase, Users, Settings, Menu, X, LogOut } from 'lucide-react'
 import { cn } from '../lib/cn'
-import { clearSignedUp } from '../lib/auth'
+import { clearSignedUp, getOrg } from '../lib/auth'
 
 const NAV = [
   { to: '/dashboard',            label: 'Dashboard',    icon: LayoutDashboard, end: true },
   { to: '/dashboard/jobs',       label: 'Jobs posted',  icon: Briefcase,       end: false },
   { to: '/dashboard/candidates', label: 'Candidates',   icon: Users,           end: false },
+  { to: '/dashboard/settings',   label: 'Settings',     icon: Settings,        end: false },
 ]
 
 function NavItems({ onNavigate }) {
@@ -62,6 +63,23 @@ function MobileAuth() {
   )
 }
 
+function OrgBadge() {
+  const org = getOrg()
+  if (!org?.name) return null
+  const initial = org.name.trim().charAt(0).toUpperCase()
+  return (
+    <div className="mx-3 mb-3 flex items-center gap-3 rounded-lg bg-ink-50/70 ring-1 ring-ink-100 px-3 py-2.5">
+      <div className="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-brand-800 text-white text-[13px] font-semibold">
+        {initial}
+      </div>
+      <div className="min-w-0">
+        <div className="truncate text-[13px] font-semibold text-ink-900">{org.name}</div>
+        <div className="truncate text-[11px] text-ink-500">{org.email || org.username}</div>
+      </div>
+    </div>
+  )
+}
+
 function SidebarInner({ onNavigate }) {
   return (
     <div className="flex h-full flex-col">
@@ -71,7 +89,9 @@ function SidebarInner({ onNavigate }) {
         </Link>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-3 py-5">
+      <OrgBadge />
+
+      <div className="flex-1 overflow-y-auto px-3 pb-5">
         <NavItems onNavigate={onNavigate} />
       </div>
     </div>
