@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import ComplianceStrip from './ComplianceStrip'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -7,7 +6,6 @@ export default function Footer() {
   return (
     <footer className="border-t border-ink-100 bg-white">
       <div className="mx-auto max-w-shell px-5 md:px-8 py-16">
-        <ComplianceStrip />
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10">
           <div className="col-span-2 md:col-span-5 flex flex-col gap-4">
             <img src="/logo-wordmark.png" alt="Renate" className="h-10 w-auto self-start" />
