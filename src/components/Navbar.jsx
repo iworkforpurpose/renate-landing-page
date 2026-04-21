@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { cn } from '../lib/cn'
 import Button from './primitives/Button'
@@ -89,13 +90,13 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2">
             <Button
-              as="a"
-              href="#cta"
+              as={Link}
+              to="/signup"
               variant={onDark ? 'brand' : 'primary'}
               size="sm"
               className="hidden sm:inline-flex"
             >
-              Book a demo
+              Sign Up
             </Button>
             <button
               className={cn(
@@ -137,8 +138,8 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <Button as="a" href="#cta" variant="primary" size="lg" className="mt-6" onClick={() => setMobileOpen(false)}>
-            Book a demo
+          <Button as={Link} to="/signup" variant="primary" size="lg" className="mt-6" onClick={() => setMobileOpen(false)}>
+            Sign Up
           </Button>
         </div>
       </div>

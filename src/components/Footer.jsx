@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import ComplianceStrip from './ComplianceStrip'
 
 export default function Footer() {
@@ -30,7 +31,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-ink-400 mb-3">Company</div>
             <ul className="flex flex-col gap-2 text-[14px]">
-              <li><a href="#cta" className="text-ink-700 hover:text-brand-800">Book a demo</a></li>
+              <li><Link to="/signup" className="text-ink-700 hover:text-brand-800">Sign Up</Link></li>
               <li><a href="mailto:hello@renate.in" className="text-ink-700 hover:text-brand-800">Contact</a></li>
               <li><a href="#" className="text-ink-700 hover:text-brand-800">Careers</a></li>
             </ul>
