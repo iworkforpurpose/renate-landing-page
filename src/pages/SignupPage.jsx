@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import Button from '../components/primitives/Button'
+import { setSignedUp } from '../lib/auth'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -21,6 +22,7 @@ export default function SignupPage() {
   })
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
+  const navigate = useNavigate()
 
   const update = (key) => (e) => {
     setForm((f) => ({ ...f, [key]: e.target.value }))
@@ -48,7 +50,9 @@ export default function SignupPage() {
     if (Object.keys(next).length === 0) {
       // TODO: replace with real signup endpoint
       console.log('Signup submission:', form)
+      setSignedUp()
       setSubmitted(true)
+      setTimeout(() => navigate('/dashboard'), 1200)
     }
   }
 

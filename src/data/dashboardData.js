@@ -1,0 +1,533 @@
+// Mock data for the Renate dashboard. All synthetic.
+
+export const JOBS = [
+  {
+    id: 'staff-backend-eng',
+    slug: 'staff-backend-eng',
+    title: 'Staff Backend Engineer',
+    department: 'Engineering',
+    location: 'Remote · US',
+    type: 'Full-time',
+    postedAt: '3 days ago',
+    accent: 'brand',
+    icon: 'terminal',
+    summary: 'Own the high-throughput payments data plane end-to-end.',
+    stats: { sourced: 10400, qualified: 540, interviewed: 50, shortlisted: 5 },
+    candidates: [
+      {
+        id: 'priya-desai', slug: 'priya-desai', initials: 'PD', name: 'Priya Desai',
+        currentRole: 'Staff Backend Engineer at Stripe',
+        companies: ['Stripe', 'Segment'],
+        atsScore: 94, resumeScore: 92, callScore: 96,
+        verdict: 'Strong Yes',
+        verdictExplanation: 'Priya combines deep Kafka operations expertise with concrete p99 wins and clear communication. Every technical claim mapped to a verifiable artifact; trajectory and scope fit the Staff IC bar cleanly.',
+        subScores: { skills: 9.4, experience: 8.8, impact: 9.6, trajectory: 8.9, communication: 9.7 },
+        strengths: [
+          { title: 'Led EU Kafka rebalancing at Stripe', detail: 'Owned the partition scheme and rollout plan; cut p99 consumer lag from 480ms to 90ms.' },
+          { title: 'Tight staff-IC trajectory', detail: 'Promoted Sr → Staff in under two years at a Tier-1 payments company.' },
+          { title: 'Clear, concrete communication', detail: 'Explained failure modes with specific numbers and rollback paths in the call.' },
+          { title: 'Cross-stack fluency', detail: 'Go, Kafka internals, Postgres, some TypeScript — no knowledge gaps during the screen.' },
+        ],
+        weaknesses: [
+          { title: 'Limited people management', detail: 'Has mentored but not formally managed; flag if tech-lead scope is required.' },
+          { title: 'Newer to on-call leadership', detail: 'First rotation as on-call lead was ~6 months ago.' },
+        ],
+      },
+      {
+        id: 'marcus-koh', slug: 'marcus-koh', initials: 'MK', name: 'Marcus Koh',
+        currentRole: 'Senior Backend Engineer at Robinhood',
+        companies: ['Airbnb', 'Robinhood'],
+        atsScore: 91, resumeScore: 91, callScore: 89,
+        verdict: 'Yes',
+        verdictExplanation: 'Solid senior with two high-bar companies on the CV. Code-review examples and trade-off reasoning were sharp. Could not demonstrate Kafka-specific ops depth, so slightly below the top candidate.',
+        subScores: { skills: 8.7, experience: 9.1, impact: 8.5, trajectory: 8.8, communication: 9.0 },
+        strengths: [
+          { title: 'Strong distributed systems reasoning', detail: 'Walked through CAP trade-offs with real examples from Robinhood trading infra.' },
+          { title: 'Two Tier-1 companies', detail: 'Airbnb → Robinhood progression signals strong hiring-bar history.' },
+          { title: 'Clean code artifacts', detail: 'Shared a public PR with thoughtful reviews; narrative matched the commit log.' },
+        ],
+        weaknesses: [
+          { title: 'Shallow Kafka ops experience', detail: 'Used managed MSK only; no partition-level operations.' },
+          { title: 'Quiet under ambiguity', detail: 'Tended to wait for prompts on open-ended design questions.' },
+        ],
+      },
+      {
+        id: 'aarav-narayan', slug: 'aarav-narayan', initials: 'AN', name: 'Aarav Narayan',
+        currentRole: 'Senior Backend Engineer at Ramp',
+        companies: ['Ramp'],
+        atsScore: 88, resumeScore: 88, callScore: 92,
+        verdict: 'Yes',
+        verdictExplanation: 'Ramp tenure gives strong fintech context. Call score edged out the resume — verified claims held up well. A clear "advance to onsite".',
+        subScores: { skills: 8.6, experience: 8.5, impact: 9.2, trajectory: 9.0, communication: 8.7 },
+        strengths: [
+          { title: 'Hands-on with Kafka + Flink', detail: 'Built fraud detection pipelines processing 40k events/sec.' },
+          { title: 'Ships end-to-end', detail: 'Described two projects spanning infra, API, and client observability.' },
+        ],
+        weaknesses: [
+          { title: 'Single-company history', detail: 'Only Ramp on CV — harder to calibrate against other engineering cultures.' },
+          { title: 'No public OSS work', detail: 'Artifacts limited to internal systems.' },
+        ],
+      },
+      {
+        id: 'jess-tran', slug: 'jess-tran', initials: 'JT', name: 'Jess Tran',
+        currentRole: 'Staff Backend Engineer at Notion',
+        companies: ['Notion', 'Figma'],
+        atsScore: 78, resumeScore: 86, callScore: 74,
+        verdict: 'Maybe',
+        verdictExplanation: 'Resume suggests Staff-IC readiness but the call had two shaky moments: team-size claim unverified and shallow answers on distributed consensus. Worth a second technical screen before advancing.',
+        subScores: { skills: 7.8, experience: 8.4, impact: 7.5, trajectory: 8.0, communication: 7.3 },
+        strengths: [
+          { title: 'Design-system-aware backend', detail: 'Collaborated closely with design on Notion API ergonomics.' },
+          { title: 'Two recognizable product companies', detail: 'Figma + Notion lineage is strong on collaborative software.' },
+        ],
+        weaknesses: [
+          { title: 'Management scope claim unverified', detail: 'Said "managed a team of 7" — unclear if IC-lead or formal report lines.' },
+          { title: 'Shallow on distributed consensus', detail: 'Could not articulate Raft trade-offs beyond surface level.' },
+          { title: 'Mixed code artifacts', detail: 'PR examples were fine but not at the depth we saw from top candidates.' },
+        ],
+      },
+      {
+        id: 'omar-baksh', slug: 'omar-baksh', initials: 'OB', name: 'Omar Baksh',
+        currentRole: 'Senior Backend Engineer at Datadog',
+        companies: ['Datadog'],
+        atsScore: 85, resumeScore: 82, callScore: 85,
+        verdict: 'Yes',
+        verdictExplanation: 'Datadog observability background is a nice-to-have. Call quality was steady and claims verified. Advance, but behind the top three.',
+        subScores: { skills: 8.5, experience: 8.3, impact: 8.2, trajectory: 8.4, communication: 8.6 },
+        strengths: [
+          { title: 'Observability-first mindset', detail: 'Strong on SLOs, error budgets, and alert design.' },
+          { title: 'Consistent tenure', detail: '5 years at Datadog with clear scope increases.' },
+        ],
+        weaknesses: [
+          { title: 'Less product-visible work', detail: 'Infra-internal focus; fewer stories about user-facing tradeoffs.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'senior-product-designer',
+    slug: 'senior-product-designer',
+    title: 'Senior Product Designer',
+    department: 'Design',
+    location: 'NYC · Hybrid',
+    type: 'Full-time',
+    postedAt: '6 days ago',
+    accent: 'rose',
+    icon: 'palette',
+    summary: 'Lead end-to-end design for our core recruiter experience.',
+    stats: { sourced: 6200, qualified: 310, interviewed: 38, shortlisted: 4 },
+    candidates: [
+      {
+        id: 'maya-linden', slug: 'maya-linden', initials: 'ML', name: 'Maya Linden',
+        currentRole: 'Senior Product Designer at Linear',
+        companies: ['Linear', 'Loom'],
+        atsScore: 96, resumeScore: 94, callScore: 98,
+        verdict: 'Strong Yes',
+        verdictExplanation: 'Top of the pool. Portfolio showed system-level thinking at Linear; the call revealed strong research instincts and opinionated taste. Every project had concrete metrics attached.',
+        subScores: { skills: 9.6, experience: 9.0, impact: 9.8, trajectory: 9.2, communication: 9.7 },
+        strengths: [
+          { title: 'Design system mastery', detail: 'Co-led the Linear v2 system redesign; shipped with measurable velocity gains.' },
+          { title: 'Research-led process', detail: 'Runs weekly customer calls and writes synthesis docs — very PM-adjacent.' },
+          { title: 'Opinionated visual craft', detail: 'Type scale, motion, and dark-mode parity all at a very high bar.' },
+          { title: 'Strong narrative', detail: 'Walked through trade-offs with clear reasoning, not just "I chose this".' },
+        ],
+        weaknesses: [
+          { title: 'Limited B2B2C exposure', detail: 'Mostly B2B tooling — recruiter + candidate dual-audience will be new.' },
+        ],
+      },
+      {
+        id: 'theo-wren', slug: 'theo-wren', initials: 'TW', name: 'Theo Wren',
+        currentRole: 'Product Designer at Figma',
+        companies: ['Figma', 'Shopify'],
+        atsScore: 89, resumeScore: 90, callScore: 88,
+        verdict: 'Yes',
+        verdictExplanation: 'Figma-born designer with strong craft. Collaboration stories were great but scoping on his own work felt slightly narrow; would benefit from pairing with a stronger PM early on.',
+        subScores: { skills: 9.0, experience: 8.7, impact: 8.5, trajectory: 8.8, communication: 8.9 },
+        strengths: [
+          { title: 'Exceptional craft', detail: 'Visual + interaction polish at the top 5%.' },
+          { title: 'Cross-functional collaboration', detail: 'Comfortable embedded in eng standups; ships with engineers directly.' },
+        ],
+        weaknesses: [
+          { title: 'Narrower scoping instinct', detail: 'Defaults to flow-level scope; senior role needs product-level scope.' },
+          { title: 'Light on research rigor', detail: 'Relies on intuition more than synthesized customer input.' },
+        ],
+      },
+      {
+        id: 'rhea-okafor', slug: 'rhea-okafor', initials: 'RO', name: 'Rhea Okafor',
+        currentRole: 'Product Designer at Airtable',
+        companies: ['Airtable', 'HubSpot'],
+        atsScore: 82, resumeScore: 84, callScore: 80,
+        verdict: 'Maybe',
+        verdictExplanation: 'Good portfolio on table-based UIs, which is relevant. Call exposed some gaps in systems-level thinking; might be better as a product designer than a senior product designer today.',
+        subScores: { skills: 8.2, experience: 8.0, impact: 7.8, trajectory: 8.3, communication: 8.0 },
+        strengths: [
+          { title: 'Complex data-UI experience', detail: 'Airtable work directly parallels our pipeline/candidate-table surface.' },
+          { title: 'Warm collaborator', detail: 'Very easy to work with; references called out her stakeholder skills.' },
+        ],
+        weaknesses: [
+          { title: 'System-level gap', detail: 'Portfolio lacked token/system work; said she prefers feature-scope.' },
+          { title: 'Limited motion/interaction reel', detail: 'Static screens dominated — no transition or prototype work.' },
+        ],
+      },
+      {
+        id: 'dmitri-vale', slug: 'dmitri-vale', initials: 'DV', name: 'Dmitri Vale',
+        currentRole: 'Freelance Product Designer',
+        companies: ['Stripe (contract)', 'Vercel (contract)'],
+        atsScore: 74, resumeScore: 78, callScore: 70,
+        verdict: 'No',
+        verdictExplanation: 'Beautiful work but the call revealed short tenures and unclear ownership on several case studies. Too much attribution risk for a senior hire.',
+        subScores: { skills: 8.0, experience: 6.5, impact: 7.0, trajectory: 7.2, communication: 7.5 },
+        strengths: [
+          { title: 'Striking visual portfolio', detail: 'Aesthetic ceiling is very high; could ship marketing-grade work.' },
+        ],
+        weaknesses: [
+          { title: 'Ownership unclear', detail: 'Several case studies were team efforts; specific contributions vague.' },
+          { title: 'Contract-only history', detail: 'No 12+ month tenure in the last 3 years.' },
+          { title: 'Call avoided concrete metrics', detail: 'Deflected when asked about measurable impact.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'head-of-product',
+    slug: 'head-of-product',
+    title: 'Head of Product',
+    department: 'Product',
+    location: 'SF · Hybrid',
+    type: 'Full-time',
+    postedAt: '2 weeks ago',
+    accent: 'amber',
+    icon: 'compass',
+    summary: 'Own product strategy and the roadmap into 2027.',
+    stats: { sourced: 4100, qualified: 180, interviewed: 22, shortlisted: 4 },
+    candidates: [
+      {
+        id: 'sonia-patel', slug: 'sonia-patel', initials: 'SP', name: 'Sonia Patel',
+        currentRole: 'Director of Product at Gusto',
+        companies: ['Gusto', 'Asana'],
+        atsScore: 93, resumeScore: 92, callScore: 94,
+        verdict: 'Strong Yes',
+        verdictExplanation: 'Has scaled a product org from 8 to 24 at Gusto. Strategic thinking was crisp and customer-informed. Best-fit profile: operator who has done the exact next stage we need.',
+        subScores: { skills: 9.2, experience: 9.4, impact: 9.3, trajectory: 9.0, communication: 9.5 },
+        strengths: [
+          { title: 'Scaled-a-PM-org experience', detail: 'Grew Gusto product org from 8 → 24, kept quality high per references.' },
+          { title: 'Strategy + execution', detail: 'Articulates big bets and the quarterly steps to get there.' },
+          { title: 'Strong go-to-market mindset', detail: 'Understands pricing and packaging, not just features.' },
+        ],
+        weaknesses: [
+          { title: 'Limited AI-product depth', detail: 'Gusto/Asana weren\'t AI-native; will ramp on our eval culture.' },
+        ],
+      },
+      {
+        id: 'chris-alder', slug: 'chris-alder', initials: 'CA', name: 'Chris Alder',
+        currentRole: 'VP Product at Mercury',
+        companies: ['Mercury', 'Square'],
+        atsScore: 90, resumeScore: 91, callScore: 89,
+        verdict: 'Yes',
+        verdictExplanation: 'Strong fintech product leader. Smaller org than Sonia\'s but higher scope title. Moves fast and has shipping discipline. Would be a safe Yes.',
+        subScores: { skills: 9.0, experience: 9.0, impact: 8.8, trajectory: 8.9, communication: 9.0 },
+        strengths: [
+          { title: 'Shipping discipline', detail: 'References praised his weekly review cadence.' },
+          { title: 'Opinionated on product', detail: 'Strong personal taste; clear point of view on AI-product patterns.' },
+        ],
+        weaknesses: [
+          { title: 'Smaller org scale', detail: 'Led team of 6 at Mercury; stepping into 10+ would be new.' },
+        ],
+      },
+      {
+        id: 'hanna-reeve', slug: 'hanna-reeve', initials: 'HR', name: 'Hanna Reeve',
+        currentRole: 'Head of Product at Retool',
+        companies: ['Retool'],
+        atsScore: 86, resumeScore: 88, callScore: 84,
+        verdict: 'Yes',
+        verdictExplanation: 'Retool Head of Product is a very credible title for us. Call was a bit heavy on process and lighter on product intuition, but overall a positive signal.',
+        subScores: { skills: 8.5, experience: 9.1, impact: 8.4, trajectory: 8.5, communication: 8.3 },
+        strengths: [
+          { title: 'Developer-product empathy', detail: 'Knows how to sell to technical buyers — parallels our recruiter audience.' },
+          { title: 'Clear operating model', detail: 'Walked through the Retool PRD + review cadence in detail.' },
+        ],
+        weaknesses: [
+          { title: 'Process-heavy framing', detail: 'Spoke more about rituals than about specific product bets.' },
+        ],
+      },
+      {
+        id: 'ernesto-diaz', slug: 'ernesto-diaz', initials: 'ED', name: 'Ernesto Diaz',
+        currentRole: 'Principal PM at Stripe',
+        companies: ['Stripe', 'Affirm'],
+        atsScore: 79, resumeScore: 84, callScore: 74,
+        verdict: 'Maybe',
+        verdictExplanation: 'Principal PM at Stripe is strong on paper but the call revealed he hasn\'t led other PMs yet. Head role may be a stretch; better as a senior IC for now.',
+        subScores: { skills: 8.5, experience: 7.8, impact: 8.0, trajectory: 7.0, communication: 7.4 },
+        strengths: [
+          { title: 'Stripe pedigree', detail: 'Worked on Payments Link, well-known surface.' },
+          { title: 'Deep AI-product work', detail: 'Has shipped multiple LLM-powered features.' },
+        ],
+        weaknesses: [
+          { title: 'No direct management', detail: 'Never formally managed PMs.' },
+          { title: 'Quiet on strategy', detail: 'Vision questions landed in execution-level answers.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'data-scientist-ml',
+    slug: 'data-scientist-ml',
+    title: 'Data Scientist, ML',
+    department: 'Data',
+    location: 'Remote · Global',
+    type: 'Full-time',
+    postedAt: '5 days ago',
+    accent: 'mint',
+    icon: 'brain',
+    summary: 'Own the ranking + calibration models behind Renate\'s scoring.',
+    stats: { sourced: 7800, qualified: 410, interviewed: 44, shortlisted: 4 },
+    candidates: [
+      {
+        id: 'nikhil-varma', slug: 'nikhil-varma', initials: 'NV', name: 'Nikhil Varma',
+        currentRole: 'Applied Scientist at Anthropic',
+        companies: ['Anthropic', 'Meta'],
+        atsScore: 95, resumeScore: 94, callScore: 96,
+        verdict: 'Strong Yes',
+        verdictExplanation: 'Exceptional applied ML profile with direct ranking-model experience at Meta. Crisp on eval methodology and calibration. A dream hire for this role.',
+        subScores: { skills: 9.5, experience: 9.2, impact: 9.6, trajectory: 9.1, communication: 9.7 },
+        strengths: [
+          { title: 'Ranking-model experience', detail: 'Owned news-feed ranker calibration at Meta for two quarters.' },
+          { title: 'Eval methodology', detail: 'Thoughtful on offline/online eval gap and counterfactual evaluation.' },
+          { title: 'Ships to production', detail: 'Not just research — has shipped models serving 100M+ users.' },
+        ],
+        weaknesses: [
+          { title: 'Limited startup pace context', detail: 'Anthropic + Meta are big orgs; pace of a <50-person startup will be a shift.' },
+        ],
+      },
+      {
+        id: 'leela-choi', slug: 'leela-choi', initials: 'LC', name: 'Leela Choi',
+        currentRole: 'Senior Data Scientist at Instacart',
+        companies: ['Instacart', 'Lyft'],
+        atsScore: 88, resumeScore: 87, callScore: 89,
+        verdict: 'Yes',
+        verdictExplanation: 'Strong marketplace DS background. Her Lyft surge-pricing work maps well to our candidate-ranking problem. Crisp, practical.',
+        subScores: { skills: 8.7, experience: 8.8, impact: 8.9, trajectory: 8.6, communication: 8.8 },
+        strengths: [
+          { title: 'Marketplace DS fluency', detail: 'Two-sided ranking problems are her bread and butter.' },
+          { title: 'Practical, not academic', detail: 'Prefers shipped iterations over polish.' },
+        ],
+        weaknesses: [
+          { title: 'Less recent NLP/LLM work', detail: 'Mostly classic ML; would ramp on transformer-based scoring.' },
+        ],
+      },
+      {
+        id: 'ravi-sharma', slug: 'ravi-sharma', initials: 'RS', name: 'Ravi Sharma',
+        currentRole: 'ML Engineer at Scale AI',
+        companies: ['Scale AI'],
+        atsScore: 83, resumeScore: 82, callScore: 84,
+        verdict: 'Yes',
+        verdictExplanation: 'Solid ML engineer with evals-heavy work at Scale. Communication is quieter but precise. Good addition to the team.',
+        subScores: { skills: 8.4, experience: 8.0, impact: 8.3, trajectory: 8.2, communication: 8.0 },
+        strengths: [
+          { title: 'Deep evals experience', detail: 'Has built human + automated eval harnesses for LLMs.' },
+          { title: 'Infrastructure-aware', detail: 'Comfortable with training and serving infra.' },
+        ],
+        weaknesses: [
+          { title: 'Less senior presence', detail: 'Came across as a high-end mid-level rather than senior.' },
+        ],
+      },
+      {
+        id: 'elena-popa', slug: 'elena-popa', initials: 'EP', name: 'Elena Popa',
+        currentRole: 'Data Scientist at DoorDash',
+        companies: ['DoorDash'],
+        atsScore: 72, resumeScore: 76, callScore: 68,
+        verdict: 'No',
+        verdictExplanation: 'Resume suggested senior profile but call exposed shallow technical depth. Several claims about A/B testing setups didn\'t hold up under follow-up questions.',
+        subScores: { skills: 7.0, experience: 7.4, impact: 7.0, trajectory: 7.2, communication: 6.8 },
+        strengths: [
+          { title: 'Reasonable breadth', detail: 'Familiar with a wide set of tools; generalist profile.' },
+        ],
+        weaknesses: [
+          { title: 'Shallow A/B test understanding', detail: 'Couldn\'t articulate basic variance/power trade-offs.' },
+          { title: 'Verified claims gap', detail: '2 of 5 claims flagged as unverifiable from transcript.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'enterprise-ae',
+    slug: 'enterprise-ae',
+    title: 'Enterprise Account Executive',
+    department: 'Sales',
+    location: 'NYC · Onsite',
+    type: 'Full-time',
+    postedAt: '8 days ago',
+    accent: 'brand',
+    icon: 'briefcase',
+    summary: 'Land top-500 employer logos. Close $250k+ ACV deals.',
+    stats: { sourced: 5400, qualified: 290, interviewed: 32, shortlisted: 4 },
+    candidates: [
+      {
+        id: 'jordan-brooks', slug: 'jordan-brooks', initials: 'JB', name: 'Jordan Brooks',
+        currentRole: 'Enterprise AE at Gong',
+        companies: ['Gong', 'Outreach'],
+        atsScore: 92, resumeScore: 91, callScore: 93,
+        verdict: 'Strong Yes',
+        verdictExplanation: 'Has closed 5 enterprise deals >$500k ACV in the last 18 months at Gong. Discovery process was rigorous — asked better questions than the recruiter. Top of pool.',
+        subScores: { skills: 9.2, experience: 9.0, impact: 9.4, trajectory: 9.1, communication: 9.5 },
+        strengths: [
+          { title: 'Verified quota attainment', detail: '142% last year, 118% the year before — references confirmed.' },
+          { title: 'Discovery-first approach', detail: 'Asked the recruiter about our ICP before talking about himself.' },
+          { title: 'Tool fluency', detail: 'Native in Gong, Outreach, Salesforce reporting.' },
+        ],
+        weaknesses: [
+          { title: 'AI/SaaS novelty', detail: 'Revenue-software background; AI-native product will be a new narrative.' },
+        ],
+      },
+      {
+        id: 'amelia-grant', slug: 'amelia-grant', initials: 'AG', name: 'Amelia Grant',
+        currentRole: 'Senior AE at Salesforce',
+        companies: ['Salesforce', 'Okta'],
+        atsScore: 86, resumeScore: 88, callScore: 84,
+        verdict: 'Yes',
+        verdictExplanation: 'Salesforce-trained, strong on process. Quota attainment solid but not elite. Would be a consistent contributor.',
+        subScores: { skills: 8.5, experience: 8.8, impact: 8.3, trajectory: 8.4, communication: 8.4 },
+        strengths: [
+          { title: 'Rigorous process', detail: 'Salesforce MEDDIC training shows in her framing.' },
+          { title: 'Enterprise motion', detail: 'Comfortable with procurement, legal, security reviews.' },
+        ],
+        weaknesses: [
+          { title: 'Quota attainment 102%', detail: 'Solid but not standout.' },
+        ],
+      },
+      {
+        id: 'kevin-duke', slug: 'kevin-duke', initials: 'KD', name: 'Kevin Duke',
+        currentRole: 'Mid-Market AE at Notion',
+        companies: ['Notion', 'Zendesk'],
+        atsScore: 78, resumeScore: 80, callScore: 76,
+        verdict: 'Maybe',
+        verdictExplanation: 'Hungry and fast but primarily mid-market, not enterprise. Might be a stretch — depends on how much we want to coach. Worth a second conversation.',
+        subScores: { skills: 7.8, experience: 7.5, impact: 8.0, trajectory: 8.4, communication: 7.9 },
+        strengths: [
+          { title: 'Hungry and fast', detail: 'Self-sourced 30% of his pipeline at Notion.' },
+          { title: 'Modern SaaS stack native', detail: 'Uses modern AI tools in his own workflow already.' },
+        ],
+        weaknesses: [
+          { title: 'No enterprise deals closed', detail: 'Largest ACV so far is $120k.' },
+          { title: 'Still learning procurement motion', detail: 'Limited exposure to security + legal reviews.' },
+        ],
+      },
+      {
+        id: 'tasha-freeman', slug: 'tasha-freeman', initials: 'TF', name: 'Tasha Freeman',
+        currentRole: 'Enterprise AE at Workday',
+        companies: ['Workday'],
+        atsScore: 84, resumeScore: 85, callScore: 83,
+        verdict: 'Yes',
+        verdictExplanation: 'Workday-trained, HR-tech-adjacent — very relevant. Good quota attainment and credible in front of HR buyers. Solid Yes.',
+        subScores: { skills: 8.4, experience: 8.5, impact: 8.2, trajectory: 8.3, communication: 8.4 },
+        strengths: [
+          { title: 'HR-tech buyer fluency', detail: 'Has sold to CHROs and TA leaders for 4 years.' },
+          { title: 'Clear discovery frame', detail: 'Walked through a deal cycle with crisp stage definitions.' },
+        ],
+        weaknesses: [
+          { title: 'Workday pace', detail: 'Long enterprise cycles; startup pace will feel faster.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'revops-lead',
+    slug: 'revops-lead',
+    title: 'RevOps Lead',
+    department: 'Operations',
+    location: 'Remote · US',
+    type: 'Full-time',
+    postedAt: '10 days ago',
+    accent: 'amber',
+    icon: 'chart',
+    summary: 'Build the revenue operating system from the ground up.',
+    stats: { sourced: 3200, qualified: 140, interviewed: 18, shortlisted: 4 },
+    candidates: [
+      {
+        id: 'alicia-moreno', slug: 'alicia-moreno', initials: 'AM', name: 'Alicia Moreno',
+        currentRole: 'Senior RevOps Manager at Ramp',
+        companies: ['Ramp', 'Gong'],
+        atsScore: 91, resumeScore: 90, callScore: 92,
+        verdict: 'Strong Yes',
+        verdictExplanation: 'Built Ramp\'s RevOps stack from scratch. Knows the early-stage motion and has a sharp analytical eye. Clear hire.',
+        subScores: { skills: 9.1, experience: 9.0, impact: 9.2, trajectory: 9.0, communication: 9.1 },
+        strengths: [
+          { title: 'Built 0→1 at Ramp', detail: 'Designed the territory + quota model from scratch.' },
+          { title: 'Strong analytical chops', detail: 'Fluent in SQL, Snowflake; ran her own dashboards.' },
+          { title: 'Fast operator', detail: 'Ships weekly; doesn\'t wait for perfect data.' },
+        ],
+        weaknesses: [
+          { title: 'Limited enterprise motion', detail: 'Ramp is mid-market; enterprise forecast rigor is new.' },
+        ],
+      },
+      {
+        id: 'peter-lin', slug: 'peter-lin', initials: 'PL', name: 'Peter Lin',
+        currentRole: 'RevOps Lead at Segment',
+        companies: ['Segment', 'Twilio'],
+        atsScore: 85, resumeScore: 86, callScore: 84,
+        verdict: 'Yes',
+        verdictExplanation: 'Long RevOps tenure; Segment scaling story is relevant. Less entrepreneurial energy than Alicia but dependable operator.',
+        subScores: { skills: 8.5, experience: 8.8, impact: 8.3, trajectory: 8.2, communication: 8.4 },
+        strengths: [
+          { title: 'Deep Salesforce architecture', detail: 'Has rebuilt 3 Salesforce instances from the ground up.' },
+          { title: 'Comfort with complexity', detail: 'Multi-product attribution is second nature.' },
+        ],
+        weaknesses: [
+          { title: 'Less 0→1 appetite', detail: 'Thrives on scaling existing systems; less energized by blank-slate work.' },
+        ],
+      },
+      {
+        id: 'yuki-ota', slug: 'yuki-ota', initials: 'YO', name: 'Yuki Ota',
+        currentRole: 'RevOps Manager at Vanta',
+        companies: ['Vanta'],
+        atsScore: 80, resumeScore: 82, callScore: 78,
+        verdict: 'Maybe',
+        verdictExplanation: 'Strong Vanta context and modern tooling fluency. Call felt a step below the leadership bar — good senior IC, maybe not lead yet.',
+        subScores: { skills: 8.0, experience: 7.8, impact: 8.0, trajectory: 8.4, communication: 7.9 },
+        strengths: [
+          { title: 'Modern RevOps stack', detail: 'Fluent in HubSpot, Clari, Gong, Salesloft.' },
+          { title: 'Startup pace', detail: 'Comfortable wearing multiple hats.' },
+        ],
+        weaknesses: [
+          { title: 'Leadership presence', detail: 'More doer than lead in the interview frame.' },
+          { title: 'Smaller team history', detail: 'Never managed others.' },
+        ],
+      },
+      {
+        id: 'wade-harrison', slug: 'wade-harrison', initials: 'WH', name: 'Wade Harrison',
+        currentRole: 'Director of RevOps at Zendesk',
+        companies: ['Zendesk'],
+        atsScore: 71, resumeScore: 78, callScore: 64,
+        verdict: 'No',
+        verdictExplanation: 'Tenured but felt out of touch with modern RevOps tooling and AI-assisted workflows. The call exposed reliance on legacy playbooks.',
+        subScores: { skills: 6.8, experience: 8.4, impact: 6.5, trajectory: 6.5, communication: 6.8 },
+        strengths: [
+          { title: 'Long tenure', detail: '12 years in RevOps; has seen many cycles.' },
+        ],
+        weaknesses: [
+          { title: 'Legacy tooling bias', detail: 'Skeptical of newer tools; talked down modern stack.' },
+          { title: 'Slow pace signals', detail: 'Described 6-month rollouts as "fast".' },
+          { title: 'AI skepticism', detail: 'Not curious about AI-assisted ops — misfit for our culture.' },
+        ],
+      },
+    ],
+  },
+]
+
+export function getJobBySlug(slug) {
+  return JOBS.find((j) => j.slug === slug)
+}
+
+export function getCandidate(jobSlug, candidateSlug) {
+  const job = getJobBySlug(jobSlug)
+  if (!job) return null
+  return job.candidates.find((c) => c.slug === candidateSlug)
+}
+
+// Verdict → tone mapping used across pages.
+export const VERDICT_TONE = {
+  'Strong Yes': { color: 'mint',  label: 'Strong Yes' },
+  'Yes':        { color: 'mint',  label: 'Yes' },
+  'Maybe':      { color: 'amber', label: 'Maybe' },
+  'No':         { color: 'rose',  label: 'No' },
+}

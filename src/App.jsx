@@ -1,31 +1,17 @@
-import { Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import PipelineCompressionStrip from './components/PipelineCompressionStrip'
-import DesignPartners from './components/DesignPartners'
-import ScoringPipeline from './components/ScoringPipeline'
-import VoiceInterview from './components/VoiceInterview'
-import TalkToRecruiter from './components/TalkToRecruiter'
-import MetricsCTA from './components/MetricsCTA'
-import Footer from './components/Footer'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import AppShell from './components/AppShell'
+import LandingPage from './pages/LandingPage'
 import SignupPage from './pages/SignupPage'
+import LoginPage from './pages/LoginPage'
+import DashboardOverviewPage from './pages/DashboardOverviewPage'
+import JobsPage from './pages/JobsPage'
+import JobDetailPage from './pages/JobDetailPage'
+import CandidatesPage from './pages/CandidatesPage'
+import CandidateDetailPage from './pages/CandidateDetailPage'
+import { isSignedUp } from './lib/auth'
 
-function LandingPage() {
-  return (
-    <div className="min-h-screen bg-white text-ink-800 font-display antialiased">
-      <Navbar />
-      <main>
-        <Hero />
-        <PipelineCompressionStrip />
-        <DesignPartners />
-        <ScoringPipeline />
-        <VoiceInterview />
-        <TalkToRecruiter />
-        <MetricsCTA />
-      </main>
-      <Footer />
-    </div>
-  )
+function RequireSignup({ children }) {
+  return isSignedUp() ? children : <Navigate to="/login" replace />
 }
 
 function App() {
@@ -33,6 +19,14 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route element={<AppShell />}>
+        <Route path="/dashboard" element={<RequireSignup><DashboardOverviewPage /></RequireSignup>} />
+        <Route path="/dashboard/jobs" element={<RequireSignup><JobsPage /></RequireSignup>} />
+        <Route path="/dashboard/jobs/:jobId" element={<RequireSignup><JobDetailPage /></RequireSignup>} />
+        <Route path="/dashboard/jobs/:jobId/:candidateId" element={<RequireSignup><CandidateDetailPage /></RequireSignup>} />
+        <Route path="/dashboard/candidates" element={<RequireSignup><CandidatesPage /></RequireSignup>} />
+      </Route>
     </Routes>
   )
 }

@@ -5,9 +5,8 @@ import { cn } from '../lib/cn'
 import Button from './primitives/Button'
 
 const LINKS = [
-  { href: '#home',      label: 'Home' },
-  { href: '#voice',     label: 'Voice interview' },
-  { href: '#talk',      label: 'Talk to Renate' },
+  { href: '#voice', label: 'Voice interview' },
+  { href: '#talk',  label: 'Talk to Renate' },
 ]
 
 export default function Navbar() {
@@ -61,8 +60,8 @@ export default function Navbar() {
               : 'bg-transparent text-ink-900 border-b border-transparent',
         )}
       >
-        <div className="mx-auto max-w-shell px-5 md:px-8 h-[var(--nav-h,76px)] flex items-center justify-between" style={{ height: 76 }}>
-          <a href="#home" className="flex items-center" aria-label="Renate home">
+        <div className="relative mx-auto max-w-shell px-5 md:px-8 h-[var(--nav-h,76px)] flex items-center justify-between" style={{ height: 76 }}>
+          <Link to="/" className="flex items-center relative z-10" aria-label="Renate home">
             <img
               src="/logo-wordmark.png"
               alt="Renate"
@@ -71,24 +70,34 @@ export default function Navbar() {
                 onDark && '[filter:brightness(0)_invert(1)]',
               )}
             />
-          </a>
+          </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            {LINKS.map(l => (
-              <a
-                key={l.href}
-                href={l.href}
-                className={cn(
-                  'text-[13px] font-medium transition-colors',
-                  onDark ? 'text-white/70 hover:text-white' : 'text-ink-600 hover:text-ink-900',
-                )}
-              >
-                {l.label}
-              </a>
-            ))}
+          <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+            {LINKS.map(l => {
+              const className = cn(
+                'text-[13px] font-medium transition-colors',
+                onDark ? 'text-white/70 hover:text-white' : 'text-ink-600 hover:text-ink-900',
+              )
+              return l.route ? (
+                <Link key={l.to} to={l.to} className={className}>{l.label}</Link>
+              ) : (
+                <a key={l.href} href={l.href} className={className}>{l.label}</a>
+              )
+            })}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 relative z-10">
+            <Link
+              to="/login"
+              className={cn(
+                'hidden sm:inline-flex h-9 items-center rounded-lg ring-1 px-3 text-[13px] font-medium transition-colors',
+                onDark
+                  ? 'ring-white/20 text-white/90 hover:bg-white/10'
+                  : 'ring-ink-200 text-ink-700 bg-white/80 backdrop-blur-sm hover:bg-white',
+              )}
+            >
+              Log in
+            </Link>
             <Button
               as={Link}
               to="/signup"
@@ -128,17 +137,36 @@ export default function Navbar() {
           </button>
         </div>
         <div className="flex flex-col gap-1 p-5">
-          {LINKS.map(l => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setMobileOpen(false)}
-              className="py-3 text-[18px] font-medium text-ink-900 border-b border-ink-100"
-            >
-              {l.label}
-            </a>
-          ))}
-          <Button as={Link} to="/signup" variant="primary" size="lg" className="mt-6" onClick={() => setMobileOpen(false)}>
+          {LINKS.map(l => {
+            const className = 'py-3 text-[18px] font-medium text-ink-900 border-b border-ink-100'
+            return l.route ? (
+              <Link
+                key={l.to}
+                to={l.to}
+                onClick={() => setMobileOpen(false)}
+                className={className}
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setMobileOpen(false)}
+                className={className}
+              >
+                {l.label}
+              </a>
+            )
+          })}
+          <Link
+            to="/login"
+            onClick={() => setMobileOpen(false)}
+            className="mt-6 inline-flex h-12 items-center justify-center rounded-lg ring-1 ring-ink-200 text-ink-800 text-[15px] font-medium"
+          >
+            Log in
+          </Link>
+          <Button as={Link} to="/signup" variant="primary" size="lg" className="mt-3" onClick={() => setMobileOpen(false)}>
             Sign Up
           </Button>
         </div>
