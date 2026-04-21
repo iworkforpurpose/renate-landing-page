@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import Button from '../components/primitives/Button'
 
@@ -52,8 +53,50 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-ink-800 font-display antialiased flex flex-col">
-      <header className="border-b border-ink-100">
+    <div className="relative min-h-screen bg-white text-ink-800 font-display antialiased flex flex-col overflow-hidden">
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-rose-50" />
+
+      <motion.div
+        aria-hidden
+        className="absolute top-1/2 left-1/2 h-[1400px] w-[1400px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70 blur-3xl"
+        style={{
+          background:
+            'conic-gradient(from 0deg, #E9DDFB, #C5A6F2, #9156EC, #F5B8D0, #E9DDFB)',
+        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 40, ease: 'linear', repeat: Infinity }}
+      />
+
+      <motion.div
+        aria-hidden
+        className="absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl mix-blend-screen"
+        style={{
+          background:
+            'conic-gradient(from 180deg, transparent, #9156EC 30%, transparent 60%, #F5B8D0 80%, transparent)',
+        }}
+        animate={{ rotate: -360 }}
+        transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
+      />
+
+      <motion.div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.6) 50%, transparent 70%)',
+        }}
+        animate={{ x: ['-100%', '100%'] }}
+        transition={{ duration: 9, ease: 'easeInOut', repeat: Infinity, repeatDelay: 2 }}
+      />
+
+      <div aria-hidden className="absolute inset-0 dot-grid-bg opacity-30" />
+
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-white/40"
+      />
+
+      <header className="relative z-10 border-b border-ink-100/60 backdrop-blur-sm bg-white/60">
         <div className="mx-auto max-w-shell px-5 md:px-8 h-[76px] flex items-center">
           <Link to="/" className="flex items-center" aria-label="Renate home">
             <img src="/logo-wordmark.png" alt="Renate" className="h-9 w-auto" />
@@ -61,7 +104,7 @@ export default function SignupPage() {
         </div>
       </header>
 
-      <main className="flex-1 flex items-center justify-center px-5 py-12 md:py-20">
+      <main className="relative z-10 flex-1 flex items-center justify-center px-5 py-12 md:py-20">
         <div className="w-full max-w-md">
           {submitted ? (
             <div className="rounded-2xl bg-white ring-1 ring-ink-200 shadow-soft-1 p-8 text-center flex flex-col items-center gap-4">
